@@ -1,0 +1,23 @@
+name: Wiki
+
+on:
+  gollum
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Slack
+        run: |
+          curl -X POST -H 'Content-type: application/json' \
+            --data-urlencode "payload={\"channel\":
+            \"#githubwikinotif\", \"username\": \"webhookbot\", 
+            \"text\": \"This is posted to #githubwikinotif and comes from a bot named webhookbot.\", 
+            \"icon_emoji\": \":ghost:\"}" 
+            https://hooks.slack.com/services/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
+        env:
+          ACTION: ${{ github.event.pages[0].action }}
+          TITLE: ${{ github.event.pages[0].title }}
+          URL: ${{ github.event.pages[0].html_url }}
+          WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
