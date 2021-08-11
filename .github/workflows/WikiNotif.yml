@@ -1,0 +1,13 @@
+name: WikiNotif
+
+on:
+  gollum
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Slack
+        run: |
+          curl -X POST -H 'Content-type: application/json' --data '{"text":"Hello, World!"}' https://hooks.slack.com/services/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
